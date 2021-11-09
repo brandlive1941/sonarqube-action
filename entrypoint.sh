@@ -18,6 +18,8 @@ if [[ ! -f "${GITHUB_WORKSPACE}/sonar-project.properties" ]]; then
   [[ -z ${INPUT_PROJECTKEY} ]] && SONAR_PROJECTKEY="${REPOSITORY_NAME}" || SONAR_PROJECTKEY="${INPUT_PROJECTKEY}"
   [[ -z ${INPUT_PROJECTNAME} ]] && SONAR_PROJECTNAME="${REPOSITORY_NAME}" || SONAR_PROJECTNAME="${INPUT_PROJECTNAME}"
   [[ -z ${INPUT_PROJECTVERSION} ]] && SONAR_PROJECTVERSION="" || SONAR_PROJECTVERSION="${INPUT_PROJECTVERSION}"
+  [[ -z ${INPUT_ANALYSISMODE} ]] && SONAR_ANALYSISMODE="" || SONAR_ANALYSISMODE="${INPUT_ANALYSISMODE}"
+  [[ -z ${INPUT_BRANCHNAME} ]] && SONAR_BRANCHNAME="" || SONAR_BRANCHNAME="${INPUT_BRANCHNAME}"
   sonar-scanner \
     -Dsonar.host.url=${INPUT_HOST} \
     -Dsonar.projectKey=${SONAR_PROJECTKEY} \
@@ -27,7 +29,9 @@ if [[ ! -f "${GITHUB_WORKSPACE}/sonar-project.properties" ]]; then
     -Dsonar.login=${INPUT_LOGIN} \
     -Dsonar.password=${SONAR_PASSWORD} \
     -Dsonar.sources=. \
-    -Dsonar.sourceEncoding=UTF-8
+    -Dsonar.sourceEncoding=UTF-8 \
+    -Dsonar.analysis.mode=${INPUT_ANALYSISMODE} \
+    -Dsonar.branch.name=${INPUT_BRANCHNAME}
 else
   sonar-scanner \
     -Dsonar.host.url=${INPUT_HOST} \
