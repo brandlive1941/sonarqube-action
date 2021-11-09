@@ -33,3 +33,9 @@ inputs:
   password:
     description: "Password that goes with the sonar.login username. This should be left blank if an authentication token is being used."
     required: false
+  analysisMode:
+    description: "Setting up analysis mode"
+    required: false
+  branchName:
+    description: "Setting up Branch analysis"
+    required: false
